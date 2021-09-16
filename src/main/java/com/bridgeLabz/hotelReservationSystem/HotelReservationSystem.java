@@ -78,11 +78,17 @@ public class HotelReservationSystem {
 	
 	public Hotel findCheapHotelsWithGoodRatingForRewardCustomers(LocalDate start, LocalDate end) {
 
-		List<Hotel> contacts = hotelList.stream().sorted((a1, a2) -> a2.getRating() - (a1.getRating()))
-				.sorted((n1, n2) -> calculateHotelPriceForRewardCustomers(n1, start, end) - calculateHotelPriceForRewardCustomers(n2, start, end))
-				.collect(Collectors.toList());
+		try {
+			List<Hotel> hotel = hotelList.stream().sorted((a1, a2) -> a2.getRating() - (a1.getRating()))
+					.sorted((n1, n2) -> calculateHotelPriceForRewardCustomers(n1, start, end) - calculateHotelPriceForRewardCustomers(n2, start, end))
+					.collect(Collectors.toList());
 
-		return contacts.get(0);
+			return hotel.get(0);
+		}
+		catch (NullPointerException e) {
+			return new Hotel();
+		}
+		
 	}
 
 	public int calculateHotelPrice(Hotel hotel, LocalDate start, LocalDate end) {
