@@ -128,4 +128,20 @@ public class HotelTest {
 		
 		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(bestHotel, startDate, endDate), 370);
 	}
+	
+	
+	@Test
+	public void addPriceForRewardCustomers() {
+		Hotel hotel1 = new Hotel("Lakewood", 110, 90, 3, 80, 80);
+		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5, 100, 40);
+		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4, 110, 50);
+
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		hotelReservationSystem.addHotel(hotel1);
+		hotelReservationSystem.addHotel(hotel2);
+		hotelReservationSystem.addHotel(hotel3);
+
+		Assert.assertEquals(100, hotel2.getRewardCustomerWeekDaysRate());
+	}
+	
 }
