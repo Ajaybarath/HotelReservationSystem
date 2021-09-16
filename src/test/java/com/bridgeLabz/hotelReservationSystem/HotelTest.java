@@ -210,5 +210,26 @@ public class HotelTest {
 		Assert.assertEquals(hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate),
 				140);
 	}
+	
+	@Test
+	public void findCheapestHotelsWithGoodRatingWithExceptionTestCase() {
+
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		
+		LocalDate startDate = LocalDate.of(2021, Month.SEPTEMBER, 17);
+		LocalDate endDate = LocalDate.of(2021, Month.SEPTEMBER, 19);
+
+		Hotel cheapHotel = hotelReservationSystem.findCheapHotelsWithGoodRating(startDate, endDate);
+		System.out.println(cheapHotel.getName() + ", Rating : " + cheapHotel.getRating() + ", and TotalRates : "
+				+ hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate));
+		
+		Hotel cheapHotelForRewardCustomers = hotelReservationSystem.findCheapHotelsWithGoodRatingForRewardCustomers(startDate, endDate);
+		System.out.println(cheapHotel.getName() + ", Rating : " + cheapHotel.getRating() + ", and TotalRates : "
+				+ hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate));
+
+		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate), 0);
+		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotelForRewardCustomers, startDate, endDate), 0);
+
+	}
 
 }

@@ -61,7 +61,7 @@ public class HotelReservationSystem {
 
 			return contacts.get(0);
 		}
-		catch (NullPointerException e) {
+		catch (Exception e) {
 			return new Hotel();
 		}
 		
@@ -85,7 +85,7 @@ public class HotelReservationSystem {
 
 			return hotel.get(0);
 		}
-		catch (NullPointerException e) {
+		catch (Exception e) {
 			return new Hotel();
 		}
 		
