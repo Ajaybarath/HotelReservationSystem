@@ -9,6 +9,10 @@ public class Hotel {
 	
 	private int rewardCustomerWeekDaysRate;
 	private int rewardCustomerWeekEndRate;
+	
+	public Hotel() {
+		
+	}
 
 	public Hotel(String name, int weekDaysRate, int weekEndRate, int rating, int rewardCustomerWeekDaysRate,
 			int rewardCustomerWeekEndRate) {
