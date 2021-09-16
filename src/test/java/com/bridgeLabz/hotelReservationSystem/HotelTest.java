@@ -15,7 +15,7 @@ public class HotelTest {
 	@Test
 	public void hotelNameAndRateTest() {
 
-		Hotel hotel = new Hotel("Lakewood", 110);
+		Hotel hotel = new Hotel("Lakewood", 110, 90);
 		
 		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel);
@@ -24,11 +24,11 @@ public class HotelTest {
 	
 	}
 	
-	
+	@Test
 	public void getCheapHotelTest() throws ParseException {
-		Hotel hotel1 = new Hotel("Lakewood", 110);
-		Hotel hotel2 = new Hotel("RidgeWood", 220);
-		Hotel hotel3 = new Hotel("BridgeWood", 160);
+		Hotel hotel1 = new Hotel("Lakewood", 110, 90);
+		Hotel hotel2 = new Hotel("RidgeWood", 220, 50);
+		Hotel hotel3 = new Hotel("BridgeWood", 160, 150);
 		
 		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
@@ -43,5 +43,20 @@ public class HotelTest {
 		
 		Assert.assertEquals(hotel.getName(), "Lakewood");
 		
+	}
+	
+	@Test
+	public void addWeekEndAndWeekDayRateToHotel() {
+		Hotel hotel1 = new Hotel("Lakewood", 110, 90);
+		Hotel hotel2 = new Hotel("RidgeWood", 220, 50);
+		Hotel hotel3 = new Hotel("BridgeWood", 160, 150);
+		
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		hotelReservationSystem.addHotel(hotel1);
+		hotelReservationSystem.addHotel(hotel2);
+		hotelReservationSystem.addHotel(hotel3);
+		
+		Assert.assertEquals(hotel1.getWeekDaysRate(), 110);
+		Assert.assertEquals(hotel1.getWeekEndRate(), 90);
 	}
 }
