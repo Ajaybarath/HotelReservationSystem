@@ -23,7 +23,7 @@ public class Hotel {
 		this.name = name;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(int  rate) {
 		this.rate = rate;
 	}
 
