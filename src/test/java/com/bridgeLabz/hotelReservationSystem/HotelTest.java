@@ -78,4 +78,20 @@ public class HotelTest {
 		System.out.println(cheapHotel.getName());
 		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate), 200);
 	}
+	
+	@Test
+	public void addHotelRating() {
+		Hotel hotel1 = new Hotel("Lakewood", 110, 90, 3);
+		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5);
+		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4);
+		
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		hotelReservationSystem.addHotel(hotel1);
+		hotelReservationSystem.addHotel(hotel2);
+		hotelReservationSystem.addHotel(hotel3);
+
+		
+		
+		Assert.assertEquals(5, hotel2.getRating());
+	}
 }
