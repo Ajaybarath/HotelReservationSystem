@@ -59,4 +59,23 @@ public class HotelTest {
 		Assert.assertEquals(hotel1.getWeekDaysRate(), 110);
 		Assert.assertEquals(hotel1.getWeekEndRate(), 90);
 	}
+	
+	
+	@Test
+	public void findCheapestHotelsBasedOnWeekEndAndWeekDayRateTestCase() {
+		Hotel hotel1 = new Hotel("Lakewood", 110, 90);
+		Hotel hotel2 = new Hotel("RidgeWood", 220, 150);
+		Hotel hotel3 = new Hotel("BridgeWood", 150, 50);
+		
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		hotelReservationSystem.addHotel(hotel1);
+		hotelReservationSystem.addHotel(hotel2);
+		hotelReservationSystem.addHotel(hotel3);
+		LocalDate startDate = LocalDate.of(2021, Month.SEPTEMBER, 17);
+		LocalDate endDate = LocalDate.of(2021, Month.SEPTEMBER, 19);
+
+		Hotel cheapHotel = hotelReservationSystem.findCheapHotelsWithWeekDaysAndWeekEndRates(startDate, endDate);
+		System.out.println(cheapHotel.getName());
+		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate), 200);
+	}
 }
