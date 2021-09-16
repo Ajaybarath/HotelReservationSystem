@@ -3,28 +3,38 @@ package com.bridgeLabz.hotelReservationSystem;
 public class Hotel {
 
 	private String name;
-	private int rate;
+	private int weekDaysRate;
+	private int weekEndRate;
 
-	public Hotel(String name, int rate) {
+	public Hotel(String name, int weekDaysRate, int weekEndRate) {
 		super();
 		this.name = name;
-		this.rate = rate;
+		this.weekDaysRate = weekDaysRate;
+		this.weekEndRate = weekEndRate;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getRate() {
-		return rate;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setRate(int  rate) {
-		this.rate = rate;
+	public int getWeekDaysRate() {
+		return weekDaysRate;
+	}
+
+	public int getWeekEndRate() {
+		return weekEndRate;
+	}
+
+	public void setWeekDaysRate(int weekDaysRate) {
+		this.weekDaysRate = weekDaysRate;
+	}
+
+	public void setWeekEndRate(int weekEndRate) {
+		this.weekEndRate = weekEndRate;
 	}
 
 }
