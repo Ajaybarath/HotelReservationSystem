@@ -69,6 +69,15 @@ public class HotelReservationSystem {
 		
 		return bestHotel;
 	}
+	
+	public Hotel findCheapHotelsWithGoodRatingForRewardCustomers(LocalDate start, LocalDate end) {
+
+		List<Hotel> contacts = hotelList.stream().sorted((a1, a2) -> a2.getRating() - (a1.getRating()))
+				.sorted((n1, n2) -> calculateHotelPriceForRewardCustomers(n1, start, end) - calculateHotelPriceForRewardCustomers(n2, start, end))
+				.collect(Collectors.toList());
+
+		return contacts.get(0);
+	}
 
 	public int calculateHotelPrice(Hotel hotel, LocalDate start, LocalDate end) {
 		final int startW = start.getDayOfWeek().getValue();
@@ -89,6 +98,30 @@ public class HotelReservationSystem {
 		long daysWithWeekends = days - daysWithoutWeekends;
 
 		long price = (daysWithoutWeekends * hotel.getWeekDaysRate()) + (daysWithWeekends * hotel.getWeekEndRate());
+
+		return (int) price;
+
+	}
+	
+	public int calculateHotelPriceForRewardCustomers(Hotel hotel, LocalDate start, LocalDate end) {
+		final int startW = start.getDayOfWeek().getValue();
+		final int endW = end.getDayOfWeek().getValue();
+
+		final long days = ChronoUnit.DAYS.between(start, end);
+		long daysWithoutWeekends = days - 2 * (days / 7); // remove weekends
+
+		if (days % 7 != 0) { // deal with the rest days
+			if (startW == 7) {
+				daysWithoutWeekends -= 1;
+			} else if (endW == 7) { // they can't both be Sunday, otherwise rest would be zero
+				daysWithoutWeekends -= 1;
+			} else if (endW < startW) { // another weekend is included
+				daysWithoutWeekends -= 2;
+			}
+		}
+		long daysWithWeekends = days - daysWithoutWeekends;
+
+		long price = (daysWithoutWeekends * hotel.getRewardCustomerWeekDaysRate()) + (daysWithWeekends * hotel.getRewardCustomerWeekEndRate());
 
 		return (int) price;
 
