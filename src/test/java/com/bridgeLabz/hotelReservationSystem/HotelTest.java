@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 
 import org.junit.Assert;
@@ -14,9 +16,12 @@ public class HotelTest {
 	public void hotelNameAndRateTest() {
 
 		Hotel hotel = new Hotel("Lakewood", 110);
-
-		Assert.assertEquals("Lakewood", hotel.getName());
-		Assert.assertEquals(110, hotel.getRate());
+		
+		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		hotelReservationSystem.addHotel(hotel);
+		
+//		Assert.assertEquals("Lakewood", hotelReservationSystem.hotel.getRate());
+	
 	}
 	
 	
@@ -30,11 +35,9 @@ public class HotelTest {
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
 		
-		String sDate="16/09/2021";  
-	    Date startDate=new SimpleDateFormat("dd/MM/yyyy").parse(sDate);  
-	    
-	    String eDate="20/09/2021";  
-	    Date endDate=new SimpleDateFormat("dd/MM/yyyy").parse(eDate);  
+
+		LocalDate startDate = LocalDate.of(2021, Month.SEPTEMBER, 16);
+		LocalDate endDate = LocalDate.of(2021, Month.SEPTEMBER, 20);
 
 		Hotel hotel = hotelReservationSystem.findCheapHotels(startDate, endDate);
 		
