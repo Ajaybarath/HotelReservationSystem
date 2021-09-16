@@ -9,9 +9,9 @@ public class HotelTest {
 	@Test
 	public void hotelNameAndRateTest() {
 
-		Hotel hotel = new Hotel("LakeWood", 110);
+		Hotel hotel = new Hotel("Lakewood", 110);
 
-		Assert.assertEquals("LakeWood", hotel.getName());
+		Assert.assertEquals("Lakewood", hotel.getName());
 		Assert.assertEquals(110, hotel.getRate());
 	}
 }
