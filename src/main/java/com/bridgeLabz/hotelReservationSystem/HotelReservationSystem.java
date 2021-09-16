@@ -60,6 +60,15 @@ public class HotelReservationSystem {
 
 		return contacts.get(0);
 	}
+	
+	public Hotel findBestRatedHotel(LocalDate start, LocalDate end) {
+
+		Hotel bestHotel = hotelList.stream()
+				.max((a1, a2) -> a1.getRating() - (a2.getRating()))
+				.orElse(null);
+		
+		return bestHotel;
+	}
 
 	public int calculateHotelPrice(Hotel hotel, LocalDate start, LocalDate end) {
 		final int startW = start.getDayOfWeek().getValue();
