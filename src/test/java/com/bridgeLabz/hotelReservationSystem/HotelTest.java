@@ -9,6 +9,7 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 
@@ -162,8 +163,19 @@ public class HotelTest {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Enter start date : dd/mm/yyyy : ");
 		String stDate = s.next();
+
+		while (!Pattern.matches("[0-9]{2}[/][0-9]{2}[/][2][0][0-9]{2}", stDate)) {
+			System.out.println("Enter in dd/mm/yyyy format");
+			stDate = s.next();
+		}
+
 		System.out.print("Enter end date : dd/mm/yyyy : ");
 		String enDate = s.next();
+
+		while (!Pattern.matches("[0-9]{2}[/][0-9]{2}[/][2][0][0-9]{2}", enDate)) {
+			System.out.println("Enter in dd/mm/yyyy format");
+			enDate = s.next();
+		}
 
 		System.out.print("Enter 1 for reward customer and 2 for normal customer:  ");
 
@@ -176,28 +188,27 @@ public class HotelTest {
 		LocalDate endDate = LocalDate.parse(enDate, dateFormat);
 
 		Hotel hotel = new Hotel();
-		
+
 		switch (customerType) {
 		case 1:
-			hotel = hotelReservationSystem.findCheapHotelsWithGoodRatingForRewardCustomers(startDate,
-					endDate);
-			System.out.println(hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
+			hotel = hotelReservationSystem.findCheapHotelsWithGoodRatingForRewardCustomers(startDate, endDate);
+			System.out.println("For reward customers " + hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
 					+ hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate));
 			break;
 
 		case 2:
 			hotel = hotelReservationSystem.findCheapHotelsWithGoodRating(startDate, endDate);
-			System.out.println(hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
+			System.out.println("For regular customers " + hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
 					+ hotelReservationSystem.calculateHotelPrice(hotel, startDate, endDate));
 			break;
-			
+
 		default:
-			 System.out.println("Enter a valid number");
-			 break;
+			System.out.println("Enter a valid number");
+			break;
 		}
 
-		Assert.assertEquals(
-				hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate), 140);
+		Assert.assertEquals(hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate),
+				140);
 	}
 
 }
