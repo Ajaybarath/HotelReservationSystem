@@ -7,6 +7,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HotelReservationSystem {
 
@@ -43,37 +45,44 @@ public class HotelReservationSystem {
 
 	public Hotel findCheapHotelsWithWeekDaysAndWeekEndRates(LocalDate start, LocalDate end) {
 
-		Hotel cheapHotel = hotelList.stream().min((n1, n2) -> calculateHotelPrice(n1, start, end)
-				- calculateHotelPrice(n2, start, end)).orElse(null);
+		Hotel cheapHotel = hotelList.stream()
+				.min((n1, n2) -> calculateHotelPrice(n1, start, end) - calculateHotelPrice(n2, start, end))
+				.orElse(null);
 
 		return cheapHotel;
 	}
 
-	
+	public Hotel findCheapHotelsWithGoodRating(LocalDate start, LocalDate end) {
+
+		List<Hotel> contacts = hotelList.stream().sorted((a1, a2) -> a2.getRating() - (a1.getRating()))
+				.sorted((n1, n2) -> calculateHotelPrice(n1, start, end) - calculateHotelPrice(n2, start, end))
+				.collect(Collectors.toList());
+
+		return contacts.get(0);
+	}
+
 	public int calculateHotelPrice(Hotel hotel, LocalDate start, LocalDate end) {
 		final int startW = start.getDayOfWeek().getValue();
-	    final int endW = end.getDayOfWeek().getValue();
+		final int endW = end.getDayOfWeek().getValue();
 
-	    final long days = ChronoUnit.DAYS.between(start, end);
-	    long daysWithoutWeekends = days - 2*(days/7); //remove weekends
+		final long days = ChronoUnit.DAYS.between(start, end);
+		long daysWithoutWeekends = days - 2 * (days / 7); // remove weekends
 
-	    if (days % 7 != 0) { //deal with the rest days
-	        if (startW == 7) {
-	            daysWithoutWeekends -= 1;
-	        } else if (endW == 7) {  //they can't both be Sunday, otherwise rest would be zero
-	            daysWithoutWeekends -= 1;
-	        } else if (endW < startW) { //another weekend is included
-	            daysWithoutWeekends -= 2;
-	        }
-	    }
-	    long daysWithWeekends = days - daysWithoutWeekends;
+		if (days % 7 != 0) { // deal with the rest days
+			if (startW == 7) {
+				daysWithoutWeekends -= 1;
+			} else if (endW == 7) { // they can't both be Sunday, otherwise rest would be zero
+				daysWithoutWeekends -= 1;
+			} else if (endW < startW) { // another weekend is included
+				daysWithoutWeekends -= 2;
+			}
+		}
+		long daysWithWeekends = days - daysWithoutWeekends;
 
 		long price = (daysWithoutWeekends * hotel.getWeekDaysRate()) + (daysWithWeekends * hotel.getWeekEndRate());
 
-		System.out.println(price + " " + hotel.getName() + " " + daysWithoutWeekends + " " + daysWithWeekends);
 		return (int) price;
-	    
-	    
+
 	}
 
 }
