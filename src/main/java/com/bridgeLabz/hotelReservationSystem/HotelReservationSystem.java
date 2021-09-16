@@ -1,6 +1,6 @@
 package com.bridgeLabz.hotelReservationSystem;
 
-public class ReservationSystem {
+public class HotelReservationSystem {
 	
 	public static void main(String args[]) {
 
