@@ -1,6 +1,7 @@
 package com.bridgeLabz.hotelReservationSystem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HotelReservationSystem {
@@ -28,6 +29,13 @@ public class HotelReservationSystem {
 		
 	}
 	
-	
+	public Hotel findCheapHotels(Date start, Date end) {
+		
+		Hotel cheapHotel = hotelList.stream().min((n1,n2) -> n1.getRate()-n2.getRate()).orElse(null);
+		
+		System.out.println(cheapHotel);
+		
+		return cheapHotel;
+	}
 
 }
