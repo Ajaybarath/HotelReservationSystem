@@ -33,7 +33,7 @@ public class HotelReservationSystem {
 
 	public Hotel findCheapHotels(LocalDate start, LocalDate end) {
 
-		Hotel cheapHotel = hotelList.stream().min((n1, n2) -> n1.getRate() - n2.getRate()).orElse(null);
+		Hotel cheapHotel = hotelList.stream().min((n1, n2) -> n1.getWeekDaysRate() - n2.getWeekDaysRate()).orElse(null);
 
 		long noOfDaysBetween = ChronoUnit.DAYS.between(start, end);
 		
