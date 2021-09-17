@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class HotelReservationSystem {
+public class HotelReservationSystem implements HotelReservationSystemInterface{
 
 	public static void main(String args[]) {
 
