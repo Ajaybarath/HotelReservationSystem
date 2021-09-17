@@ -21,7 +21,7 @@ public class HotelTest {
 
 		Hotel hotel = new Hotel("Lakewood", 110, 90);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		List<Hotel> hotelList = hotelReservationSystem.addHotel(hotel);
 
 		Assert.assertEquals(true, hotelList.contains(hotel));
@@ -34,7 +34,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 50);
 		Hotel hotel3 = new Hotel("BridgeWood", 160, 150);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -54,7 +54,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 50);
 		Hotel hotel3 = new Hotel("BridgeWood", 160, 150);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -69,7 +69,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -88,7 +88,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -102,7 +102,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -122,7 +122,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -142,7 +142,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5, 100, 40);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4, 110, 50);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -156,7 +156,7 @@ public class HotelTest {
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5, 100, 40);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4, 110, 50);
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 		hotelReservationSystem.addHotel(hotel1);
 		hotelReservationSystem.addHotel(hotel2);
 		hotelReservationSystem.addHotel(hotel3);
@@ -216,7 +216,7 @@ public class HotelTest {
 	@Test
 	public void findCheapestHotelsWithGoodRatingWithExceptionTestCase() {
 
-		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
+		HotelReservationSystemInterface hotelReservationSystem = new HotelReservationSystem();
 
 		LocalDate startDate = LocalDate.of(2021, Month.SEPTEMBER, 17);
 		LocalDate endDate = LocalDate.of(2021, Month.SEPTEMBER, 19);
