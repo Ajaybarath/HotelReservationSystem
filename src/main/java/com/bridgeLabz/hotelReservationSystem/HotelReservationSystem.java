@@ -54,7 +54,7 @@ public class HotelReservationSystem {
 		return cheapHotel;
 	}
 
-	public Hotel findCheapHotelsWithGoodRating(LocalDate start, LocalDate end) {
+	public Hotel findCheapHotelsWithGoodRating(LocalDate start, LocalDate end) throws HotelReservationSystemException {
 
 		try {
 			List<Hotel> contacts = hotelList.stream()
@@ -65,7 +65,7 @@ public class HotelReservationSystem {
 
 			return contacts.get(0);
 		} catch (Exception e) {
-			return new Hotel();
+			throw new HotelReservationSystemException("The hotel list is empty..");
 		}
 
 	}
@@ -78,7 +78,7 @@ public class HotelReservationSystem {
 		return bestHotel;
 	}
 
-	public Hotel findCheapHotelsWithGoodRatingForRewardCustomers(LocalDate start, LocalDate end) {
+	public Hotel findCheapHotelsWithGoodRatingForRewardCustomers(LocalDate start, LocalDate end) throws HotelReservationSystemException {
 
 		try {
 			List<Hotel> hotel = hotelList.stream().sorted((hotel1, hotel2) -> hotel2.getRating() - (hotel1.getRating()))
@@ -88,7 +88,7 @@ public class HotelReservationSystem {
 
 			return hotel.get(0);
 		} catch (Exception e) {
-			return new Hotel();
+			throw new HotelReservationSystemException("The hotel list is empty..");
 		}
 
 	}
