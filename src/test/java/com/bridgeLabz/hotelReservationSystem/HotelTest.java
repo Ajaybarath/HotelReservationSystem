@@ -97,7 +97,7 @@ public class HotelTest {
 	}
 
 	@Test
-	public void findCheapestHotelsWithGoodRatingTestCase() {
+	public void findCheapestHotelsWithGoodRatingTestCase() throws HotelReservationSystemException {
 		Hotel hotel1 = new Hotel("Lakewood", 110, 90, 3);
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4);
@@ -151,7 +151,7 @@ public class HotelTest {
 	}
 
 	@Test
-	public void findCheapestHotelsWithGoodRatingForRewardCustomerTestCase() {
+	public void findCheapestHotelsWithGoodRatingForRewardCustomerTestCase() throws HotelReservationSystemException {
 		Hotel hotel1 = new Hotel("Lakewood", 110, 90, 3, 80, 80);
 		Hotel hotel2 = new Hotel("RidgeWood", 220, 150, 5, 100, 40);
 		Hotel hotel3 = new Hotel("BridgeWood", 150, 50, 4, 110, 50);
@@ -193,14 +193,15 @@ public class HotelTest {
 		switch (customerType) {
 		case 1:
 			hotel = hotelReservationSystem.findCheapHotelsWithGoodRatingForRewardCustomers(startDate, endDate);
-			System.out.println("For reward customers " + hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
+			System.out.println("For reward customers " + hotel.getName() + ", Rating : " + hotel.getRating()
+					+ ", and TotalRates : "
 					+ hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate));
 			break;
 
 		case 2:
 			hotel = hotelReservationSystem.findCheapHotelsWithGoodRating(startDate, endDate);
-			System.out.println("For regular customers " + hotel.getName() + ", Rating : " + hotel.getRating() + ", and TotalRates : "
-					+ hotelReservationSystem.calculateHotelPrice(hotel, startDate, endDate));
+			System.out.println("For regular customers " + hotel.getName() + ", Rating : " + hotel.getRating()
+					+ ", and TotalRates : " + hotelReservationSystem.calculateHotelPrice(hotel, startDate, endDate));
 			break;
 
 		default:
@@ -211,25 +212,37 @@ public class HotelTest {
 		Assert.assertEquals(hotelReservationSystem.calculateHotelPriceForRewardCustomers(hotel, startDate, endDate),
 				140);
 	}
-	
+
 	@Test
 	public void findCheapestHotelsWithGoodRatingWithExceptionTestCase() {
 
 		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
-		
+
 		LocalDate startDate = LocalDate.of(2021, Month.SEPTEMBER, 17);
 		LocalDate endDate = LocalDate.of(2021, Month.SEPTEMBER, 19);
 
-		Hotel cheapHotel = hotelReservationSystem.findCheapHotelsWithGoodRating(startDate, endDate);
-		System.out.println(cheapHotel.getName() + ", Rating : " + cheapHotel.getRating() + ", and TotalRates : "
-				+ hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate));
-		
-		Hotel cheapHotelForRewardCustomers = hotelReservationSystem.findCheapHotelsWithGoodRatingForRewardCustomers(startDate, endDate);
-		System.out.println(cheapHotel.getName() + ", Rating : " + cheapHotel.getRating() + ", and TotalRates : "
-				+ hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate));
+		Hotel cheapHotel = new Hotel();
+		try {
+			cheapHotel = hotelReservationSystem.findCheapHotelsWithGoodRating(startDate, endDate);
+			System.out.println(cheapHotel.getName() + ", Rating : " + cheapHotel.getRating() + ", and TotalRates : "
+					+ hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate));
 
-		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotel, startDate, endDate), 0);
-		Assert.assertEquals(hotelReservationSystem.calculateHotelPrice(cheapHotelForRewardCustomers, startDate, endDate), 0);
+		} catch (HotelReservationSystemException e) {
+			Assert.assertEquals("The hotel list is empty..", e.getMessage());
+
+		}
+
+		Hotel cheapHotelForRewardCustomers;
+		try {
+			cheapHotelForRewardCustomers = hotelReservationSystem
+					.findCheapHotelsWithGoodRatingForRewardCustomers(startDate, endDate);
+			System.out.println(cheapHotelForRewardCustomers.getName() + ", Rating : "
+					+ cheapHotelForRewardCustomers.getRating() + ", and TotalRates : "
+					+ hotelReservationSystem.calculateHotelPrice(cheapHotelForRewardCustomers, startDate, endDate));
+
+		} catch (HotelReservationSystemException e) {
+			Assert.assertEquals("The hotel list is empty..", e.getMessage());
+		}
 
 	}
 
