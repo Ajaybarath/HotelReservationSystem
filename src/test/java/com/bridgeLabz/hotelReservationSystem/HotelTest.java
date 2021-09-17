@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -21,9 +22,9 @@ public class HotelTest {
 		Hotel hotel = new Hotel("Lakewood", 110, 90);
 
 		HotelReservationSystem hotelReservationSystem = new HotelReservationSystem();
-		hotelReservationSystem.addHotel(hotel);
+		List<Hotel> hotelList = hotelReservationSystem.addHotel(hotel);
 
-//		Assert.assertEquals("Lakewood", hotelReservationSystem.hotel.getRate());
+		Assert.assertEquals(true, hotelList.contains(hotel));
 
 	}
 
